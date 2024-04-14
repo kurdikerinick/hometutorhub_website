@@ -1,0 +1,85 @@
+
+.top-section {
+  display: flex;
+  margin-top: 20px;
+  margin-left: 20%;
+}
+
+.search-bar {
+  width: 400px; /* Increase width as needed */
+  height: 40px; /* Increase height as needed */
+  padding: 10px; /* Adjust padding for better content visibility */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+.search-bar input {
+  width: 100%; /* Adjust width to fill the entire space of the search bar */
+  height: 100%; /* Optionally adjust height to match the search bar height */
+  border: none; /* Remove border to make it flush with the search bar */
+  outline: none;
+  font-size: 16px;
+}
+
+.branch-select select {
+  width: 300%; /* Adjust width to fill the entire space of the branch select */
+  height: 100%; /* Optionally adjust height to match the branch select height */
+  padding: 8px; /* Adjust padding for better content visibility */
+  border: none; /* Remove border to make it flush with the branch select */
+  outline: none;
+  border: 1px solid #ccc;
+
+  font-size: 16px;
+}
+
+.tables-container {
+  margin-top: 20px;
+  margin-left: 20%;
+}
+
+/* Adjust other styles as needed */
+
+  
+  .columns-container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+  }
+  
+  .list-column {
+    flex-basis: 30%;
+  }
+  
+  .list-column h2 {
+    text-align: center;
+  }
+  
+  .list-column ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .list-column li {
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .list-column li:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .list-column li:active {
+    background-color: #ccc;
+  }
+  .tables-container {
+    display: flex;
+  }
+  
+  .tables-container > div {
+    margin-right: 20px; /* Adjust the spacing between tables */
+  }
+  

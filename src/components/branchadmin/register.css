@@ -1,0 +1,47 @@
+.registration-container {
+    max-width: 400px;
+    margin: 0 auto;
+
+  }
+  
+   h1 {
+    margin-bottom: 20px;
+  }
+  
+  .registration-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .registration-container form div {
+    margin-bottom: 10px;
+  }
+  
+  .registration-container form input[type="text"],
+  .registration-container form input[type="email"],
+  .registration-container form input[type="date"],
+  .registration-container form input[type="password"],
+  .registration-container form select,
+    .registration-container form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  
+  .registration-container form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #1b58a8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .registration-container form button:hover {
+    background-color: #144183;
+  }
+  
