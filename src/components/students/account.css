@@ -1,0 +1,80 @@
+.stud-container {
+  margin-left: 250px;
+  padding: 50px;
+  flex-grow: 1;
+  transition: margin-left 0.3s ease;
+  background-color: #f4f4f4;
+}
+
+/* When sidebar is hidden */
+.stud-container.shifted {
+  margin-left: 0;
+}
+
+/* Section Styles */
+.section {
+  margin-bottom: 20px;
+}
+
+/* Header Row Styles */
+.headerRow {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  background-color: #e0e0e0;
+  padding: 10px;
+}
+
+/* Title Styles */
+.title {
+  flex: 1;
+}
+
+/* Student Row Styles */
+.studentRow {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  background-color: #fff;
+}
+
+.studentData {
+  flex: 1;
+}
+
+/* Paragraph Container Styles */
+.p-container {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+
+
+  .stud-container {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+ 
+
+
+  .stud-container {
+    margin-left: 0;
+    padding: 50px;
+  }
+
+  .headerRow {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .studentRow {
+    font-size: 14px;
+    padding: 8px 0;
+  }
+}

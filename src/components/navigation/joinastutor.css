@@ -1,0 +1,85 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url(../../images/externaltutor.jpg);
+    background-position: left;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: #ffffff; /* Set your desired background color */
+  }
+  
+
+  .form-wrapper {
+    background-position: right;
+    transform : translate(50%, 0%);
+    flex: 1; /* Occupy 50% of the container width */
+    padding: 15px; /* Adjust padding as needed */
+    background-color: #ffffff; /* Form background color */
+    border-radius: 8px; /* Rounded corners for the form */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+    max-width: 400px; /* Limit width to maintain readability */
+  }
+  
+  .form-wrapper h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333333; /* Form title color */
+  }
+  
+  .form-wrapper form {
+    display: flex;
+    flex-direction: column;
+    line-height: 1px;
+  }
+  
+  .form-wrapper div {
+    margin-bottom: 10px;
+  }
+  
+  .form-wrapper input,
+  .form-wrapper select {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #cccccc; /* Input border color */
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .form-wrapper select {
+    appearance: none; /* Remove default select styles */
+  }
+  
+  .form-wrapper button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff; /* Button background color */
+    color: #ffffff; /* Button text color */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .form-wrapper button:hover {
+    background-color: #0056b3; /* Darker hover color */
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      background-image: none; /* Remove background image on smaller screens */
+      padding: 20px; /* Add padding for smaller screens */
+    }
+  
+    .form-wrapper {
+      padding: 20px;
+      transform: translate(0, 0); /* Reset transform for smaller screens */
+      max-width: 100%; /* Ensure the form takes full width on smaller screens */
+    }
+  
+    .form-wrapper input,
+    .form-wrapper select {
+      width: 100%; /* Ensure inputs take full width */
+    }
+  }

@@ -22,7 +22,7 @@ function SuperAdminSidebar({ userEmail }) {
         <li><Link to="/enquiressuperadmin"><ContactMailIcon />Enquiries</Link></li>
 
       </ul>
-      <div className='logout'><Link to="/private-route"> Logout</Link></div>
+      <div className='logout'><Link to="/navbar"> Logout</Link></div>
     </div>
   );
 }

@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "srtdemo-dfee0"
-  }
+    "default": "hometutorhub-a8c90"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }

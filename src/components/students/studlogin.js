@@ -1,50 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { getAuth, sendEmailVerification, signInWithEmailAndPassword } from 'firebase/auth';
-import { app } from '../../firebase/firebase';
-import { ref, get } from 'firebase/database';
+import { db } from '../../firebase/firebase';
+import { get,ref  } from 'firebase/database'; // Correct imports
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const StudentLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Use useNavigate hook
-
-  useEffect(() => {
-    const checkVerification = async () => {
-      try {
-        const auth = getAuth(app);
-        const superadminRef = ref(app.database(), 'superadmin/1');
-        const snapshot = await get(superadminRef);
-
-        if (snapshot.exists()) {
-          const superadminData = snapshot.val();
-          if (superadminData.email === email && superadminData.password === password) {
-            if (auth.currentUser && auth.currentUser.emailVerified) {
-              toast.success('Email is verified!');
-            }
-          }
-        }
-      } catch (error) {
-        console.error('Error checking verification:', error);
-      }
-    };
-
-    checkVerification();
-  }, [email, password]);
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const auth = getAuth(app);
+      const auth = getAuth(); // Use the auth from the imported functions
       await signInWithEmailAndPassword(auth, email, password);
+      const user = auth.currentUser;
 
-      if (!auth.currentUser.emailVerified) {
-        await sendVerificationEmail(auth.currentUser);
+      const studentsRef = ref(db, 'students'); // Use the ref from the imported functions
+      const snapshot = await get(studentsRef); // Use the get from the imported functions
+
+      let studentId = null;
+      if (snapshot.exists()) {
+        const studentsData = snapshot.val();
+        for (const id in studentsData) {
+          if (studentsData[id].email === email) {
+            studentId = id;
+            break;
+          }
+        }
+      }
+
+      if (!user.emailVerified) {
+        await sendVerificationEmail(user);
         toast.info('Verification email sent. Please check your inbox and click on the verification link.');
       } else {
-        navigate('/sdashboard'); // Navigate to dashboard if already verified
+        if (studentId) {
+          localStorage.setItem('studentId', studentId);
+          navigate(`/monitortest/${studentId}`); // Navigate to MonitorTests page with studentId
+        } else {
+          setError('Student ID not found.');
+        }
       }
     } catch (error) {
       console.error('Error signing in:', error);

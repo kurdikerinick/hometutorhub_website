@@ -1,0 +1,139 @@
+
+.content {
+    flex: 1;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.payment-section {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* UPI Code section */
+.upi-code {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px; /* Space between the text and button */
+    margin-bottom: 20px;
+}
+
+.upi-code p {
+    font-size: 18px;
+    margin: 0; /* Remove default margin */
+}
+
+.upi-code button {
+    padding: 5px 10px;
+    background-color: #1b58a8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.upi-code button:hover {
+    background-color: #155a8a;
+}
+
+/* QR Code section */
+.qr-code {
+    margin: 20px 0;
+}
+
+.qr-image {
+    width: 250px; /* Base size for larger screens */
+    height: auto;
+    max-width: 100%; /* Ensure responsiveness */
+    display: block; /* Remove extra space below image */
+    margin: 0 auto; /* Center image horizontally */
+}
+
+/* Form section */
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-section input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.form-section button {
+    padding: 10px;
+    background-color: #1b58a8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-section button:hover {
+    background-color: #155a8a;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .payment-section {
+        padding: 15px;
+    }
+
+    .upi-code {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .upi-code button {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .payment-section {
+        padding: 10px;
+    }
+
+    .form-section {
+        gap: 8px;
+    }
+
+    .form-section input {
+        font-size: 16px;
+    }
+
+    .form-section button {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .payment-section {
+        padding: 5px;
+    }
+
+    .upi-code {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .upi-code button {
+        margin-top: 10px;
+        width: 100%; /* Full-width button on small screens */
+    }
+
+    .qr-image {
+        width: 300px; /* Smaller size for small screens */
+    }
+
+    .form-section input,
+    .form-section button {
+        font-size: 14px;
+        padding: 12px; /* Larger padding for touch screens */
+    }
+}

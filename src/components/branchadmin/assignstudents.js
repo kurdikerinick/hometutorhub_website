@@ -8,11 +8,11 @@ const Assign = () => {
   const [students, setStudents] = useState([]);
   const [assignments, setAssignments] = useState([]);
   const [draggedStudent, setDraggedStudent] = useState(null);
-  const [selectedBranch, setSelectedBranch] = useState('');
+  // const [selectedBranch, setSelectedBranch] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    console.log("Fetching tutors...");
+    console.log("Fetching data...");
     const db = getDatabase();
     const tutorsRef = ref(db, 'tutor_ref');
     const studentsRef = ref(db, 'stud_ref');
@@ -67,20 +67,19 @@ const Assign = () => {
       console.error("Invalid dragged student:", draggedStudent);
       return;
     }
-  
-    console.log("Student dropped onto tutor:", draggedStudent,tutor);
-  
+
+    console.log("Student dropped onto tutor:", draggedStudent, tutor);
+
     const studentId = draggedStudent.student_id;
-  
     const assignmentRef = ref(getDatabase(), `assignments/${studentId}`);
-  
+
     const assignmentData = {
-      student_id:studentId,
+      student_id: studentId,
       tutor_id: tutor.tutor_id, // Using tutor.tutor_id directly
       stud_name: draggedStudent.stud_name,
       tutor_name: tutor.tutor_name,
     };
-  
+
     set(assignmentRef, assignmentData)
       .then(() => {
         const studentRef = ref(getDatabase(), `stud_ref/${studentId}`);
@@ -95,118 +94,138 @@ const Assign = () => {
       .catch(error => {
         console.error("Error assigning tutor:", error);
       });
-  
+
     setDraggedStudent(null);
   };
-  
+
+  // Filter tutors and students based on search query
+  const filteredTutors = tutors.filter(tutor =>
+    tutor.ccategory.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredStudents = students.filter(student =>
+    student.class.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-   
-      
     <div className="assign-container">
-    <BranchAdminSidebar/> 
-    <div className="top-section">
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
+      <BranchAdminSidebar /> 
+      <div className="top-section">
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+        {/* <div className="branch-select">
+          <select
+            value={selectedBranch}
+            onChange={(e) => setSelectedBranch(e.target.value)}
+          >
+            <option value="">Select Branch</option>
+            <option value="branch1">Branch 1</option>
+            <option value="branch2">Branch 2</option>
+            <option value="branch3">Branch 3</option>
+          </select>
+        </div> */}
       </div>
-      <div className="branch-select">
-        <select
-          value={selectedBranch}
-          onChange={(e) => setSelectedBranch(e.target.value)}
-        >
-          <option value="">Select Branch</option>
-          <option value="branch1">Branch 1</option>
-          <option value="branch2">Branch 2</option>
-          <option value="branch3">Branch 3</option>
-        </select>
-      </div>
-    </div>
 
       <div className="tables-container">
+        <div className="students-list">
+          <h2>Students List</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Student Name</th>
+                <th>Contact</th>
+                <th>Class</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredStudents.length > 0 ? (
+                filteredStudents.map(student => (
+                  <tr
+                    key={student.student_id}
+                    draggable
+                    onDragStart={() => handleDragStart(student)}
+                  >
+                    <td>{student.stud_name}</td>
+                    <td>{student.contact}</td>
+                    <td>{student.class}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3">No students found</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
 
-      <div className="students-list">
-  <h2>Students List</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Student Name</th>
-        <th> Contact</th>
-        <th>Class</th>
+        <div className="tutors-list">
+          <h2>Tutors List</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Tutor Name</th>
+                <th>Contact</th>
+                <th>Gender</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredTutors.length > 0 ? (
+                filteredTutors.map(tutor => (
+                  <tr key={tutor.tutor_id}>
+                    <td
+                      onDragOver={(e) => e.preventDefault()}
+                      onDrop={() => handleDrop(tutor)}
+                    >
+                      {tutor.tutor_name}
+                    </td>
+                    <td>{tutor.contact}</td>
+                    <td>{tutor.gender}</td>
+                    <td>{tutor.ccategory}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="4">No tutors found</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
 
-      </tr>
-    </thead>
-    <tbody>
-      {students.map(student => (
-        <tr
-          key={student.student_id}
-          draggable
-          onDragStart={() => handleDragStart(student)}
-        >
-          <td>{student.stud_name}</td>
-          <td>{student.contact}</td>
-          <td>{student.class}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
-
-
-      <div className="tutors-list">
-  <h2>Tutors List</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Tutor Name</th>
-        <th>Contact</th>
-        <th>Gender</th>
-        <th>Category</th>
-      </tr>
-    </thead>
-    <tbody>
-      {tutors.map(tutor => (
-        <tr key={tutor.tutor_id}>
-          <td
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={() => handleDrop(tutor)}
-          >
-            {tutor.tutor_name}
-          </td>
-          <td>{tutor.contact}</td>
-          <td>{tutor.gender}</td>
-          <td>{tutor.ccategory}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
-
-
-<div className="assignments-list">
-  <h2>Assignments List</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Tutor</th>
-        <th>Student</th>
-      </tr>
-    </thead>
-    <tbody>
-      {assignments.map(assignment => (
-        <tr key={assignment.student_id}>
-          <td>{assignment.tutor_name}</td>
-          <td>{assignment.stud_name}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
-</div>
+        <div className="assignments-list">
+          <h2>Assignments List</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Tutor</th>
+                <th>Student</th>
+              </tr>
+            </thead>
+            <tbody>
+              {assignments.length > 0 ? (
+                assignments.map(assignment => (
+                  <tr key={assignment.student_id}>
+                    <td>{assignment.tutor_name}</td>
+                    <td>{assignment.stud_name}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="2">No assignments found</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

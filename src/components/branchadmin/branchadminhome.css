@@ -9,7 +9,10 @@
   overflow-y: auto;
   font-family: Arial, sans-serif; /* Use Arial font family */
 }
-
+.sidebar1{
+  margin-left: 20%;
+    color: #1b58a8;
+}
 .sidebar-header {
   padding: 20px;
 }

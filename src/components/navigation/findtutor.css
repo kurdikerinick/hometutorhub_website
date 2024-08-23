@@ -1,0 +1,79 @@
+.tutors-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+  }
+  
+  .tutors-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 4%;
+    color: #333; /* Adjust text color as needed */
+  }
+  
+  
+  .tutors-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  .navbar-logo {
+    color: white;
+    font-size: 1.8rem;
+    max-width: 100%;
+   
+  }
+  .tutor-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tutor-card-header {
+    margin-bottom: 10px;
+  }
+  
+  .tutor-card-body {
+    flex-grow: 1;
+  }
+  
+  .tutor-card-body p {
+    margin: 5px 0;
+  }
+  
+  .tutor-card-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .details-button,
+  .apply-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .details-button:hover,
+  .apply-button:hover {
+    background-color: #0056b3;
+  }
+  @media (max-width: 768px) {
+
+  .tutors-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 16%;
+    color: #333; /* Adjust text color as needed */
+  }
+}

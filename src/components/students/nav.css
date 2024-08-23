@@ -1,0 +1,120 @@
+/* Basic styling for the top navigation bar
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  padding: 10px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+} */
+
+/* Styling for the burger icon */
+.burger-icon {
+  cursor: pointer;
+  font-size: 24px;
+  color: black; /* Ensure the icon color stands out against the background */
+  position: fixed;
+  left: 10px;
+  top: 50%; /* Vertically center */
+  transform: translateY(-50%); /* Adjust for exact center alignment */
+  z-index: 1001; /* Ensure it is above the sidebar */
+}
+
+/* Sidebar styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #1b58a8;
+  color: #fff;
+  transition: transform 0.3s ease;
+  z-index: 1000; /* Ensure it appears above other content */
+  overflow-y: auto;
+  transform: translateX(0); /* Always visible on larger screens */
+}
+
+/* Hide sidebar off-screen for responsive view */
+.sidebar.hide {
+  transform: translateX(-100%); /* Hide off-screen */
+}
+
+/* Sidebar header styles */
+.sidebar-header {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  background-color: #1a447d;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  margin-left: 10px;
+}
+
+/* Sidebar menu styles */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  margin: 10px 0;
+}
+
+.sidebar-menu li a {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.sidebar-menu li a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+/* Adjustments for the container when sidebar is visible */
+.monitor-tests-container.sidebar-visible .stud-container {
+  margin-left: 250px; /* Adjust based on the sidebar width */
+  transition: margin-left 0.3s ease;
+}
+
+.stud-container {
+  flex: 1;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+.stud-container.shifted {
+  margin-left: 250px; /* Adjust based on the sidebar width */
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .burger-icon {
+    display: block;
+    position: fixed;
+    top: 10px; /* Adjust as needed for responsive view */
+    left: 50%; /* Center horizontally in mobile view */
+    transform: translateX(-50%); /* Adjust for exact center alignment */
+  }
+
+  .sidebar {
+    width: 55%; /* Adjust the width for mobile view */
+    transform: translateX(-100%); /* Start off-screen */
+  }
+
+  .sidebar.show {
+    transform: translateX(0); /* Slide in */
+  }
+}
