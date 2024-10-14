@@ -1,79 +1,181 @@
 .tutors-container {
-    margin: 20px;
-    padding: 20px;
-    background-color: #ffffff;
-  }
-  
+  margin: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.tutors-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 4%;
+  color: #333; /* Adjust text color as needed */
+}
+
+/* Grid layout for tutors */
+.tutors-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Styling for the logo */
+.navbar-logo {
+  color: white;
+  font-size: 1.8rem;
+  max-width: 100%;
+}
+
+/* Card styling */
+/* .tutor-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+} */
+
+/* Hover effect on cards */
+.tutor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Header of the card */
+.tutor-card-header {
+  margin-bottom: 10px;
+}
+
+/* Body of the card */
+.tutor-card-body {
+  flex-grow: 1;
+}
+
+/* Styling for paragraphs in the card body */
+.tutor-card-body p {
+  margin: 5px 0;
+}
+
+/* Footer of the card */
+.tutor-card-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* Buttons styling */
+.details-button,
+.apply-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.details-button:hover,
+.apply-button:hover {
+  background-color: #0056b3;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
   .tutors-container h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    margin-top: 4%;
-    color: #333; /* Adjust text color as needed */
+    margin-top: 16%; /* Adjust margin for better spacing */
   }
-  
-  
-  .tutors-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-  .navbar-logo {
-    color: white;
-    font-size: 1.8rem;
-    max-width: 100%;
-   
-  }
+
   .tutor-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .tutor-card-header {
-    margin-bottom: 10px;
-  }
-  
-  .tutor-card-body {
-    flex-grow: 1;
-  }
-  
-  .tutor-card-body p {
-    margin: 5px 0;
-  }
-  
-  .tutor-card-footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-  
-  .details-button,
-  .apply-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
+    width: 100%; /* Full width for cards on smaller screens */
+max-width: -webkit-fill-available;;
   }
 
-  .details-button:hover,
-  .apply-button:hover {
-    background-color: #0056b3;
-  }
-  @media (max-width: 768px) {
-
-  .tutors-container h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    margin-top: 16%;
-    color: #333; /* Adjust text color as needed */
+  .tutors-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Adjust min-width of cards */
   }
 }
+
+/* Media query for very small screens (mobile devices) */
+@media (max-width: 480px) {
+  .tutors-grid {
+    gap: 15px;
+  }
+
+  .tutors-container h1 {
+    font-size: 1.5rem; /* Adjust heading size */
+    margin-top: 20%; /* Adjust top margin */
+  }
+
+  .tutor-photo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .apply-button {
+    padding: 8px 16px; /* Slightly reduce button padding */
+  }
+}
+
+.tutor-card {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.tutor-card-header,
+.tutor-card-body,
+.tutor-card-footer {
+  margin-bottom: 10px;
+}
+
+.tutor-photo {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.tutors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.apply-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.apply-button:hover {
+  background-color: #45a049;
+}
+
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+

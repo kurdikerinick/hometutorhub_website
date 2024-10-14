@@ -2,9 +2,17 @@ import React, { useState } from 'react';
 import { ref, set, push } from 'firebase/database';
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import './joinastutor.css';
+import { Link } from 'react-router-dom';
+import logo from '../../images/hometutorhublogo.png';
+
 import { db } from '../../firebase/firebase'; // Adjust path as needed
 import { useNavigate } from 'react-router-dom';
 const Joinstudent = () => {
+  const handleMobileMenuToggle = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
   const [formData, setFormData] = useState({
     stud_name: '',
     email: '',
@@ -16,12 +24,46 @@ const Joinstudent = () => {
     class: '',
     subject: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    additionalOptions: []
+
   });
 const navigate= useNavigate();
+
+const locationOptions = {
+  Hubballi: [
+    'OldHubballi', 'Vidyanagar', 'Keshwapur', 'Gokul road', 'Unkal', 'SaiNagar',
+    'Lingaraj Nagar', 'Akshay Park', 'Akshay Colony', 'Manjunath Nagar',
+    'Deshpande Nagar', 'Navanagar'
+  ],
+  Dharwad: [
+    'Malamaddi', 'Kalyan Nagar', 'Shivagiri', 'CBNagar', 'Saptapur',
+    'RaniChennamma Nagar', 'SaiNagar', 'Sampige Nagar', 'ShriNagar',
+    'Basava Nagar', 'Navoday Nagar', 'Nisarga Layout', 'Madihal', 'Mrutyunjay Nagar'
+  ],
+  Gadag: [
+    'Mulgund Naka', 'Hatalgeri Naka', 'Sambapur Road', 'Hudko Colony',
+    'Puttaraj Nagar', 'Mudhol'
+  ],
+};
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+    const { name } = e.target;
+    setFormData((prevFormData) => {
+      const updatedOptions = checked
+        ? [...prevFormData[name], value]
+        : prevFormData[name].filter((item) => item !== value);
+
+      return {
+        ...prevFormData,
+        [name]: updatedOptions,
+      };
+    });
   };
 
   const handleSelectChange = (e) => {
@@ -102,6 +144,8 @@ navigate('/navbar')
       contact: formData.contact,
       subject: formData.subject,
       location: formData.location,
+      additionalOptions: formData.additionalOptions, // Save additional options
+
     };
     await set(studRef, dataToSave);
     console.log('Additional data saved to stud_ref successfully!');
@@ -111,6 +155,33 @@ navigate('/navbar')
 
   return (
     <div className="container">
+      <nav className={`navbar ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
+        <div className="navbar-container">
+          <Link to="/" >
+            <img className="navbar-logo" src={logo} alt="Logo" />
+          </Link>
+          <div className={`navbar-links ${isMobileMenuOpen ? 'mobile-menu' : ''}`}>
+            <Link to="/" >Home</Link>
+            <Link to="/jointutor">Join as Tutor</Link>
+            <Link to="/joinstudent">Join as Student</Link>
+            <Link to="/findtutor">Find Tutor</Link>
+            <Link to="/" >About</Link>
+            <Link to="/" >Contact</Link>
+            <div className="navbar-dropdown">
+              <button className="dropbtn">Login</button>
+              <div className="dropdown-content">
+                <Link to="/studentlogin">Student</Link>
+                {/* <Link to="/slogin">Super Admin</Link> */}
+                {/* <Link to="/blogin">Branch Admin</Link> */}
+                <Link to="/tutorlogin">Tutor</Link>
+              </div>
+            </div>
+          </div>
+          <div className="mobile-menu-toggle" onClick={handleMobileMenuToggle}>
+            &#9776; {/* Unicode for the hamburger icon */}
+          </div>
+        </div>
+      </nav>
       <div className='form-wrapper'>
         <h1>Register as Student</h1>
         <form onSubmit={handleSubmit}>
@@ -216,18 +287,37 @@ navigate('/navbar')
           </div>
           <div>
             <select
-              placeholder='Location'
               name="location"
               value={formData.location}
               onChange={handleSelectChange}
               required
             >
               <option value="">Select a Location</option>
-              <option value="branch1">Branch 1</option>
-              <option value="branch2">Branch 2</option>
-              <option value="branch3">Branch 3</option>
+              <option value="Hubballi">Hubballi</option>
+              <option value="Dharwad">Dharwad</option>
+              <option value="Gadag">Gadag</option>
             </select>
           </div>
+
+          {/* Conditionally render additional options based on selected location */}
+          {formData.location && locationOptions[formData.location] && (
+            <div>
+              <p>Additional Options for {formData.location}:</p>
+              {locationOptions[formData.location].map((option) => (
+                <div key={option}>
+                  <input
+                    type="checkbox"
+                    name="additionalOptions"
+                    value={option}
+                    checked={formData.additionalOptions.includes(option)}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label>{option}</label>
+                </div>
+              ))}
+            </div>
+          )}
+
           <button type="submit" className="register-button">Register</button>
         </form>
       </div>

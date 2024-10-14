@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
+import { ref as sRef, uploadBytes } from 'firebase/storage';
 import { ref, set, push } from 'firebase/database';
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
-import { db } from '../../firebase/firebase'; // Adjust path as needed
+import { db, storage } from '../../firebase/firebase'; // Adjust path as needed
 import './joinastutor.css';
+import { Link } from 'react-router-dom';
+import logo from '../../images/hometutorhublogo.png';
+
 import { useNavigate } from 'react-router-dom';
 
 const Jointutor = () => {
+  const handleMobileMenuToggle = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+
   const [formData, setFormData] = useState({
     tutor_name: '',
     email: '',
@@ -18,6 +28,7 @@ const Jointutor = () => {
     additionalOptions: [],
     password: '',
     confirmPassword: '',
+    photo: null, // Add photo state
   });
 
   const navigate = useNavigate();
@@ -57,6 +68,11 @@ const Jointutor = () => {
     }));
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFormData((prevFormData) => ({ ...prevFormData, photo: file }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -75,6 +91,11 @@ const Jointutor = () => {
 
         // Save form data to database
         await saveFormData(response.user.uid);
+
+        // Upload photo to Firebase Storage
+        if (formData.photo) {
+          await uploadFile(formData.photo, response.user.uid);
+        }
 
         alert('Registration successful. Verification email sent.');
         navigate('/navbar'); // Redirect to homepage
@@ -133,10 +154,44 @@ const Jointutor = () => {
     console.log('Additional data saved to tutor_ref successfully!');
   };
 
+  const uploadFile = async (file, userId) => {
+    if (!file) return;
+    const storageRef = sRef(storage, `tutor_photos/${userId}/${file.name}`);
+    await uploadBytes(storageRef, file);
+    console.log('File uploaded successfully!');
+  };
+
   return (
     <div className="container">
+       <nav className={`navbar ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
+        <div className="navbar-container">
+          <Link to="/" >
+            <img className="navbar-logo" src={logo} alt="Logo" />
+          </Link>
+          <div className={`navbar-links ${isMobileMenuOpen ? 'mobile-menu' : ''}`}>
+            <Link to="/" >Home</Link>
+            <Link to="/jointutor">Join as Tutor</Link>
+            <Link to="/joinstudent">Join as Student</Link>
+            <Link to="/findtutor">Find Tutor</Link>
+            <Link to="/" >About</Link>
+            <Link to="/" >Contact</Link>
+            <div className="navbar-dropdown">
+              <button className="dropbtn">Login</button>
+              <div className="dropdown-content">
+                <Link to="/studentlogin">Student</Link>
+                {/* <Link to="/slogin">Super Admin</Link> */}
+                {/* <Link to="/blogin">Branch Admin</Link> */}
+                <Link to="/tutorlogin">Tutor</Link>
+              </div>
+            </div>
+          </div>
+          <div className="mobile-menu-toggle" onClick={handleMobileMenuToggle}>
+            &#9776; {/* Unicode for the hamburger icon */}
+          </div>
+        </div>
+      </nav>
       <div className="form-wrapper">
-        <h1>Registration</h1>
+        <h1>Registration as Tutor</h1>
         <form onSubmit={handleSubmit}>
           <div>
             <input
@@ -286,6 +341,13 @@ const Jointutor = () => {
               ))}
             </div>
           )}
+          <div>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+            />
+          </div>
           <button type="submit" className="joinbutton">Join as Tutor</button>
         </form>
       </div>

@@ -6,6 +6,7 @@
     background-image: url(../../images/externaltutor.jpg);
     background-position: left;
     background-size: contain;
+    padding: 50px;
     background-repeat: no-repeat;
     background-color: #ffffff; /* Set your desired background color */
   }
@@ -13,18 +14,18 @@
 
   .form-wrapper {
     background-position: right;
-    transform : translate(50%, 0%);
-    flex: 1; /* Occupy 50% of the container width */
-    padding: 15px; /* Adjust padding as needed */
-    background-color: #ffffff; /* Form background color */
-    border-radius: 8px; /* Rounded corners for the form */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
-    max-width: 400px; /* Limit width to maintain readability */
+    transform: translate(50%, 0%);
+    flex: 1 1;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 350px;
+    margin-top: 2%;
   }
-  
   .form-wrapper h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 2px;
     color: #333333; /* Form title color */
   }
   
@@ -75,7 +76,8 @@
     .form-wrapper {
       padding: 20px;
       transform: translate(0, 0); /* Reset transform for smaller screens */
-      max-width: 100%; /* Ensure the form takes full width on smaller screens */
+      max-width: 100%; 
+      margin-top: 40%;/* Ensure the form takes full width on smaller screens */
     }
   
     .form-wrapper input,
