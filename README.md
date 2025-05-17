@@ -1,4 +1,5 @@
-Features
+Features :
+
 User-friendly interface for easy navigation
 
 Search functionality to find tutors based on subjects and location
@@ -9,7 +10,8 @@ Secure user authentication and authorization
 
 Responsive design for mobile and desktop devices
 
-Technologies Used
+Technologies Used :
+
 Frontend: HTML, CSS, JavaScript
 
 Backend: Node.js, Express.js
