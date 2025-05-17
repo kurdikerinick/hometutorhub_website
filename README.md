@@ -20,7 +20,7 @@ Database: Firebase
 
 Authentication: JWT (JSON Web Tokens)
 
-Deployment: Firebase Hosting
+Deployment: Firebase Hosting   [hometutorhub.in]
 
 
 ![Image](https://github.com/user-attachments/assets/ad6a5c1b-94c8-4bd8-9fa3-fc09fd2efa03)
