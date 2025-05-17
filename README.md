@@ -1,26 +1,27 @@
-Features :
+# HomeTutorHub Website
 
-User-friendly interface for easy navigation
+**HomeTutorHub** is a web platform designed to connect students with qualified home tutors.
 
-Search functionality to find tutors based on subjects and location
+## Overview
 
-Tutor profiles with detailed information
+- **Advertisement**: The website serves as a platform for advertising tutoring services, attracting potential students and tutors.
+- **Role-based Access**: Different levels of access are provided, including student, tutor, super admin, and branch admin logins, ensuring secure and controlled access to the system.
 
-Secure user authentication and authorization
+## Features
 
-Responsive design for mobile and desktop devices
+- User-friendly interface for easy navigation  
+- Search functionality to find tutors based on subjects and location  
+- Tutor profiles with detailed information  
+- Secure user authentication and authorization  
+- Responsive design for mobile and desktop devices  
 
-Technologies Used :
+## Technologies Used
 
-Frontend: HTML, CSS, JavaScript
-
-Backend: Node.js, Express.js
-
-Database: Firebase
-
-Authentication: JWT (JSON Web Tokens)
-
-Deployment: Firebase Hosting   [hometutorhub.in]
+- **Frontend**: HTML, CSS, JavaScript  
+- **Backend**: Node.js, Express.js  
+- **Database**: Firebase  
+- **Authentication**: JWT (JSON Web Tokens)  
+- **Deployment**: Firebase Hosting  [hometutorhub.in]
 
 
 ![Image](https://github.com/user-attachments/assets/ad6a5c1b-94c8-4bd8-9fa3-fc09fd2efa03)
